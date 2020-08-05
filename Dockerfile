@@ -8,10 +8,6 @@ RUN apt-get update && apt-get install -y gnupg2 && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -y yarn=${YARN_VERSION}-1 && \
-    useradd -ms /bin/bash lichess && \
-    apt-get install sudo && \
-    # Disable sudo login for the new lichess user.
-    echo "lichess ALL = NOPASSWD : ALL" >> /etc/sudoers && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
     yarn global add gulp
@@ -21,5 +17,3 @@ ENV LC_CTYPE "en_US.UTF-8"
 ENV TZ=Etc/GMT
 
 WORKDIR /home/lichess
-
-USER lichess
